@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y pkg-config libcairo2-dev git gettext &&
     npm i
 
 COPY secret.tpl.json ./shields/
+RUN mkdir -p /opt/shields/private
 
-CMD envsubst < shields/secret.tpl.json > shields/private/secret.json && node shields/server.js
+CMD envsubst < /opt/shields/secret.tpl.json > /opt/shields/private/secret.json && node shields/server.js
 
 EXPOSE 80
